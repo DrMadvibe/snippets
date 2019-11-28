@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Click Events with addEventListener</title>
+	<style>
+		body {
+			color: #51626f;
+			font-family: 'Open Sans', Arial, "Helvetica Neue", Helvetica, sans-serif;
+		}
+	</style>
+</head>
+<body>
+	
+	<h1>Click Events with addEventListener</h1>
+
+	<p>Open a popup window by adding the class "js-on-click" in the anchor element.</p>
+
+	<p>The following links will open a popup window with the options and dimension specified.</p>
+
+	<p>IE11 has partial support for "matches", so this uses a polyfill for IE9+.</p>
+	
+	<ul>
+		<li><a href="https://www.bbc.co.uk" class="js-on-click">The BBC</a></li>
+		<li><a href="https://www.gov.uk" class="js-on-click">Gov.UK</a></li>
+	</ul>
+
+	<pre>
+		<code>
+	document.addEventListener('click', function (event) {
+
+		// If the clicked element doesn't have the right selector, bail
+		if (!event.target.matches('.js-on-click')) return;
+
+		// Don't follow the link
+		event.preventDefault();
+
+		var url = event.target.href;
+
+		// Open a popup window
+		window.open(url,"name","directories=0,height=600,width=600,top=100,left=100,location=0,menubar=0,resizable=1,scrollbars=1,status=0,toolbar=1");
+
+
+	}, false);
+
+	/*
+	* Element.matches() polyfill (simple version)
+	* https://developer.mozilla.org/en-US/docs/Web/API/Element/matches#Polyfill
+	*/
+	if (!Element.prototype.matches) {
+		Element.prototype.matches = Element.prototype.msMatchesSelector || Element.prototype.webkitMatchesSelector;
+	}
+		</code>
+	</pre>
+
+	<p>Source: <a href="https://gomakethings.com/listening-for-click-events-with-vanilla-javascript/" target="_blank">Go Make Things: Listening for click events with vanilla JavaScript</a></p>
+
+	<script>
+		document.addEventListener('click', function (event) {
+
+			// If the clicked element doesn't have the right selector, bail
+			if (!event.target.matches('.js-on-click')) return;
+
+			// Don't follow the link
+			event.preventDefault();
+
+			var url = event.target.href;
+
+			// Open a popup window
+			window.open(url,"name","directories=0,height=600,width=600,top=100,left=100,location=0,menubar=0,resizable=1,scrollbars=1,status=0,toolbar=1");
+
+
+		}, false);
+
+		/*
+		* Element.matches() polyfill (simple version)
+		* https://developer.mozilla.org/en-US/docs/Web/API/Element/matches#Polyfill
+		*/
+		if (!Element.prototype.matches) {
+			Element.prototype.matches = Element.prototype.msMatchesSelector || Element.prototype.webkitMatchesSelector;
+		}
+	</script>
+
+</body>
+</html>
